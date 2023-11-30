@@ -1,49 +1,36 @@
 from tkinter import *
-from tkinter import messagebox as msb
+from tkinter import messagebox
 
-###### 1. Create window ######
-window = Tk()   # Create a window
-window.title("Payment")   # Set a title
-window.geometry("400x250")   # Set a size
+###### 1. CREATE WINDOW ######
+window = Tk()
+window.title('Demo GUI 02')
+window.geometry('400x300')
 
-###### 2. Event handlers ######
+###### 2. IMPLEMENT HANDLERS ######
 def btn_ok_clicked():
-    try:
-        price = int(txt_price.get())            # get the price from the text box
-        quantity = int(txt_quantity.get())      # get the quantity from the text box
-        total_payment = f'{price * quantity}$'  # calculate the total payment
+    # get name from txt_name
+    name = txt_name.get()
+    # get age from txt_age
+    age = txt_age.get()
+    # show messagebox
+    messagebox.showinfo(f'Hello {name}', f'You are {age} years old')
 
-        lbl_total.config(text=total_payment)    # set the total payment to the label
-    except ValueError:
-        msb.showerror("Error", "Please enter numbers for price & quantity!")
+###### 3. CREATE WIDGETS ######
+# create a label
+lbl_name = Label(window, text='Name')
+lbl_name.grid(row=0, column=0)
 
-###### 3. Create widgets ######
-lbl_product = Label(window, text="Product:")
-lbl_product.grid(row=0, column=0)
+txt_name = Entry(window)
+txt_name.grid(row=0, column=1)
 
-txt_product = Entry(window)
-txt_product.grid(row=0, column=1)
+lbl_age = Label(window, text='Age')
+lbl_age.grid(row=1, column=0)
 
-lbl_price = Label(window, text="Price:")
-lbl_price.grid(row=1, column=0)
+txt_age = Entry(window)
+txt_age.grid(row=1, column=1)
 
-txt_price = Entry(window)
-txt_price.grid(row=1, column=1)
+btn_ok = Button(window, text='OK', command=btn_ok_clicked)
+btn_ok.grid(row=2, column=1, sticky=W)
 
-lbl_quantity = Label(window, text="Quantity:")
-lbl_quantity.grid(row=2, column=0)
-
-txt_quantity = Entry(window)
-txt_quantity.grid(row=2, column=1)
-
-btn_ok = Button(window, text="OK", command=btn_ok_clicked)
-btn_ok.grid(row=3, column=1, sticky=W)
-
-lbl_payment = Label(window, text="Payment:")
-lbl_payment.grid(row=4, column=0)
-
-lbl_total = Label(window, text="0$")
-lbl_total.grid(row=4, column=1, sticky=W)
-
-###### 4. Run the window ######
-window.mainloop()   
+###### RUN ######
+window.mainloop()

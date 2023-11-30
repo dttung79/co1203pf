@@ -1,47 +1,69 @@
 from tkinter import *
-from tkinter import messagebox as msb
+from tkinter import messagebox
 
-###### 1. Create window ######
-window = Tk()   # Create a window
-window.title("Register Retake Classes")   # Set a title
-window.geometry("300x200")   # Set a size
+###### 1. CREATE WINDOW ######
+window = Tk()
+window.title('Arithmetic Operators')
+window.geometry('400x300')
 
-###### 2. Event handlers ######
-def btn_ok_clicked():
-    total = 0
-    if cb1752_checked.get() == True: # if check box is checked
-        total += 300
-    if cb1821_checked.get() == True:
-        total += 300
-    if cb1863_checked.get() == True:
-        total += 300
+###### 2. IMPLEMENT HANDLERS ######
+def calculate(op):
+    a = int(txt_a.get())
+    b = int(txt_b.get())
+    if op == '+':
+        c = a + b
+    elif op == '-':
+        c = a - b
+    elif op == 'x':
+        c = a * b
+    elif op == ':':
+        c = a / b
     
-    lbl_total.config(text=f'{total}$')
+    txt_c.delete(0, END)
+    txt_c.insert(0, c)
 
-###### 3. Create widgets ######
-lbl_select = Label(window, text="Select courses:")
-lbl_select.grid(row=0, column=0)
+def btn_add_clicked():
+    calculate('+')
 
-cb1752_checked = BooleanVar() # create a boolean variable to bind with the check box
-cb_1752 = Checkbutton(window, text="1752", variable=cb1752_checked)
-cb_1752.grid(row=0, column=1)
+def btn_sub_clicked():
+    calculate('-')
 
-cb1821_checked = BooleanVar()
-cb_1821 = Checkbutton(window, text="1821", variable=cb1821_checked)
-cb_1821.grid(row=1, column=1)
+def btn_mul_clicked():
+    calculate('x')
 
-cb1863_checked = BooleanVar()
-cb_1863 = Checkbutton(window, text="1863", variable=cb1863_checked)
-cb_1863.grid(row=2, column=1)
+def btn_div_clicked():
+    calculate(':')
 
-btn_ok = Button(window, text="OK", command=btn_ok_clicked)
-btn_ok.grid(row=3, column=1, sticky=W)
+###### 3. CREATE WIDGETS ######
+lbl_a = Label(window, text='a')
+lbl_a.grid(row=0, column=0, padx=10, pady=5)
 
-lbl_payment = Label(window, text="Payment:")
-lbl_payment.grid(row=4, column=0)
+txt_a = Entry(window)
+txt_a.grid(row=0, column=1, padx=0, pady=5)
 
-lbl_total = Label(window, text="0$")
-lbl_total.grid(row=4, column=1, sticky=W)
+lbl_b = Label(window, text='b')
+lbl_b.grid(row=1, column=0, padx=10, pady=5)
 
-###### 4. Run the window ######
-window.mainloop()   # Run the window in a main loop, waiting for events
+txt_b = Entry(window)
+txt_b.grid(row=1, column=1, padx=0, pady=5)
+
+lbl_c = Label(window, text='c')
+lbl_c.grid(row=2, column=0, padx=10, pady=5)
+
+txt_c = Entry(window)
+txt_c.grid(row=2, column=1, padx=0, pady=5)
+
+btn_add = Button(window, text='+', command=btn_add_clicked)
+btn_add.grid(row=3, column=1, padx=0, pady=5)
+
+btn_sub = Button(window, text='-', command=btn_sub_clicked)
+btn_sub.grid(row=4, column=1, padx=0, pady=5)
+
+btn_mul = Button(window, text='*', command=btn_mul_clicked)
+btn_mul.grid(row=5, column=1, padx=0, pady=5)
+
+btn_div = Button(window, text='/', command=btn_div_clicked)
+btn_div.grid(row=6, column=1, padx=0, pady=5)
+
+###### RUN ######
+window.mainloop()
